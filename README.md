@@ -40,6 +40,15 @@ jobs:
         path: app/build/reports/checkstyle/
 ```
 
+リポジトリ設定で、失敗したチェックをブロックするように設定できます：
+
+1.GitHub リポジトリに移動します。  
+2.「Settings」タブをクリックします。  
+3.左サイドバーの「Branches」をクリックします。  
+4.「Branch protection rules」セクションで、「Add rule」をクリックします。  
+5.保護したいブランチ名（例：main）を入力し、「Require status checks to pass before merging」を有効にします。  
+6.追加したチェック（例：Checkstyle）を選択します。
+
 ## Trivy でできること
 
 - 対応する OS のパッケージ情報から脆弱性を検出する。
@@ -59,3 +68,4 @@ jobs:
 ## 基本ワークフロー
 
 ![基本ワークフロ](/image/基本ワークフロー.jpg)
+仮でワークフローファイルの側を作成。

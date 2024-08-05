@@ -1,0 +1,44 @@
+name: Update ECS Service
+
+on:
+  push:
+    branches:
+      - main # デプロイをトリガーするブランチを指定
+
+jobs:
+  update-ecs-service:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+      - name: Retrieve the current task definition
+        id: task-def
+        run: |
+          TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition my-task-definition)
+          echo "$TASK_DEFINITION" > current-task-def.json
+          echo "::set-output name=task-def::$TASK_DEFINITION"
+
+      - name: Update task definition with new image
+        id: new-task-def
+        run: |
+          NEW_TASK_DEFINITION=$(jq '.taskDefinition.containerDefinitions[0].image="my-new-image:latest"' current-task-def.json)
+          echo "$NEW_TASK_DEFINITION" > new-task-def.json
+          echo "::set-output name=new-task-def::$NEW_TASK_DEFINITION"
+
+      - name: Register the new task definition
+        id: register-task-def
+        run: |
+          REGISTERED_TASK_DEFINITION=$(aws ecs register-task-definition --cli-input-json file://new-task-def.json)
+          echo "::set-output name=registered-task-def::$REGISTERED_TASK_DEFINITION"
+
+      - name: Update ECS service
+        run: |
+          NEW_TASK_DEF_ARN=$(echo "${{ steps.register-task-def.outputs.registered-task-def }}" | jq -r '.taskDefinition.taskDefinitionArn')
+          aws ecs update-service --cluster my-cluster --service my-service --task-definition "$NEW_TASK_DEF_ARN"
