@@ -1,0 +1,20 @@
+{
+  "name": "Java 17 Development Container",
+  "image": "mcr.microsoft.com/vscode/devcontainers/java:0-17",
+  "settings": {
+    "java.home": "/usr/local/openjdk-17",
+    "java.jdt.ls.vmargs": "-XX:+UseG1GC -XX:+UseStringDeduplication -Xmx4G -Xms100m"
+  },
+  "extensions": [
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-maven",
+    "vscjava.vscode-java-debug",
+    "vscjava.vscode-java-test",
+    "redhat.java"
+  ],
+  "forwardPorts": [
+    8080
+  ],
+  "postCreateCommand": "java -version",
+  "remoteUser": "vscode"
+}
