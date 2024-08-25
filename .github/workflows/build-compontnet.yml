@@ -21,5 +21,3 @@ jobs:
         run: |
           echo '${{github.repositry_owner}}'
           echo '${{secrets.GITHUB_TOKEN}}'
-	
-
