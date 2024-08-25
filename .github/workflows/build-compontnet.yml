@@ -1,0 +1,25 @@
+build common component
+
+
+on:
+  workflow_dispatch:
+
+env:
+  GPR_USERNAME: ${{github.repositry_owner}}
+  GPR_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+
+
+jobs:
+  build-common-component:
+    runs-on: codebuild-actions-runner-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setting publish properties
+        run: |
+          echo '${{github.repositry_owner}}'
+          echo '${{secrets.GITHUB_TOKEN}}'
+	
+
