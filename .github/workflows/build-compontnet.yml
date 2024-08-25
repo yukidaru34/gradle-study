@@ -1,5 +1,4 @@
-build common component
-
+name: Build Common Component
 
 on:
   workflow_dispatch:
@@ -7,8 +6,6 @@ on:
 env:
   GPR_USERNAME: ${{github.repositry_owner}}
   GPR_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-
 
 jobs:
   build-common-component:
@@ -19,5 +16,5 @@ jobs:
 
       - name: Setting publish properties
         run: |
-          echo '${{github.repositry_owner}}'
-          echo '${{secrets.GITHUB_TOKEN}}'
+          echo '${{env.GPR_USERNAME}}'
+          echo '${{env.GPR_TOKEN}}'
