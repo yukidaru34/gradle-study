@@ -7,6 +7,7 @@ updates:
     # Check the npm registry for updates every day (weekdays)
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 0
 
   # Enable version updates for maven
   - package-ecosystem: "maven"
@@ -15,9 +16,10 @@ updates:
     # Check for updates once a week
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 0
 
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 20
+    open-pull-requests-limit: 0
