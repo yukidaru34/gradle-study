@@ -23,7 +23,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: check_commit
-    if: ${{env.commit_count}} > 0
+    if: ${{ fromJson('["' + env.commit_count + '"]')[0] > 0 }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
