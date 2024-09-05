@@ -78,5 +78,4 @@ git push origin "$NEW_TAG"
 
 # GitHub Actions用の環境変数ファイルに書き込む
 echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
-
 echo "Successfully bumped version to $NEW_VERSION"

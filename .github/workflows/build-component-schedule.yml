@@ -1,0 +1,61 @@
+name: CI api component scheduled
+
+  on:
+    schedule:
+      -cron: '0 0 * * *'
+
+jobs:
+  check_commit:
+   runs-on: ubuntu-latest
+    step:
+      -name: Get commits in the last day
+      run: |
+        # 実行時点の時間を取得
+        current_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        commits=%(git log --since="$past_time" --util="$current_time")
+        echo "$commits" > commits.txt
+        commit_count=$(echo "$commits" | wc -l)
+        echo "commit_count=$commit_count" >> $GITHUB_ENV
+  build:
+    runs-on: 
+    needs: check_commit
+    if: env.commit_count > 0
+    steps:
+      - name: Checkout repository
+        use: actions/checkout@v4
+        with:
+          ref: develop
+
+      - name: Set up JDK 
+        uses: actions/setup-java@v2
+        with:
+          distribution: "temurin"
+          java-version: "21"
+          server-id: gradle
+          settings-path: ${{ github.workspace}}
+          cacerts: false
+      #PJ内ではここでcatoの証明書をkeytoolコマンドでインポートしています
+      
+      - name: Install Gradle
+        run: |
+          wget https://service.gradle.org/distributions/gradle-8.5-bin.zip
+          unzip -d /opt/gradle gradle-8.5-bin.zip
+          echo "PATH=$PATH:/opt/gradle/gradle-8.5/bin" >> $GITHUB_ENV
+      
+      - name: Build and Publish Jar
+        env:
+          GITHUB_USERNAME: ${{ github.actor}} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+        working_directory: zsy
+        run: |
+          gradle ysyJar -Pjarversion=${{ env.NEW_VERSION}} 
+          gradle publish
+
+      - name: Build and Publish Jar
+        env:
+          GITHUB_USERNAME: ${{ github.actor}} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+        working_directory: ysy
+        run: |
+          gradle ysyJar -PJarversion=${{ env.NEW_VERSION}} 
+          gradle publish
