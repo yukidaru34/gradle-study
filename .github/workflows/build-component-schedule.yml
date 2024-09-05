@@ -6,6 +6,8 @@ on:
 jobs:
   check_commit:
     runs-on: ubuntu-latest
+    outputs:
+      commit_count: ${{ steps.get_commit_count.outputs.commit_count }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,7 +20,9 @@ jobs:
           commits=$(git log --since="$past_time" --until="$current_time")
           echo "$commits" > commits.txt
           commit_count=$(echo "$commits" | grep -c '^commit')
-          echo "::set-output name=commit_count::$commit_count"
+          echo "commit_count=$commit_count" >> $GITHUB_ENV
+        env:
+          GITHUB_ENV: ${{ github.env }}
 
   build:
     runs-on: ubuntu-latest
