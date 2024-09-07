@@ -32,7 +32,14 @@ publishing {
         }
     }
     repositories {
-        mavenLocal()
+        maven {
+			name = "gpr"
+			uri("https://maven.pkg.github.com")
+			credentials {
+				username = project.findProperty("gpr.user") ?: System.getenv("GPR_USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("GPR_TOKEN")
+			}
+		}
     }
 }
 

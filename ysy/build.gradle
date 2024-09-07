@@ -26,13 +26,14 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+version = '0.1.0-snapshot'
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
             groupId = 'com.example'
             artifactId = 'zsy-zz'
-            version = '1.0.0'
         }
     }
     repositories {
@@ -40,3 +41,9 @@ publishing {
     }
 }
 
+task ysyJar(type: Jar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from sourceSets.main.output
+    form sourceSets.main.resources
+    archiveVersion.set(project.hasProperty('jarVersion') ? project.jarVersion : version)
+}
