@@ -1,5 +1,8 @@
 name: Build Common Component
 
+permissions:
+  actions: write
+
 on:
   workflow_dispatch:
 
