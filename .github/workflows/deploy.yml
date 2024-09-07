@@ -1,9 +1,7 @@
 name: Update ECS Service
 
 on:
-  push:
-    branches:
-      - main # デプロイをトリガーするブランチを指定
+  workflow_dispatch:
 
 jobs:
   update-ecs-service:
