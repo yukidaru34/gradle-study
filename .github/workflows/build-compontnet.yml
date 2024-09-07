@@ -16,5 +16,6 @@ jobs:
 
       - name: bump.sh
         run: |
+          pwd
           chmod +x ./bump.sh
           ./bump.sh zsy patch
