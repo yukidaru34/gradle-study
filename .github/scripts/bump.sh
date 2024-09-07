@@ -24,7 +24,7 @@ else
   # 最新のタグのバージョン番号を分割
   echo "最新のタグは ${LATEST_TAG} です。"
 
-  VERSION=$(echo "$LATEST_TAG" | sed "s/^${PREFIX}//")
+  VERSION=$(echo "$LATEST_TAG" | sed "s/^${PREFIX}://")
   MAJOR=$(echo "$VERSION" | cut -d. -f1)
   MINOR=$(echo "$VERSION" | cut -d. -f2)
   PATCH=$(echo "$VERSION" | cut -d. -f3)
@@ -56,5 +56,6 @@ fi
 # 新しいタグの作成と出力
 git tag "$NEW_TAG"
 echo "新しいタグ ${NEW_TAG} を作成しました。"
+echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
 
