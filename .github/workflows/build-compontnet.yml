@@ -17,5 +17,5 @@ jobs:
       - name: bump.sh
         run: |
           pwd
-          chmod +x ./bump.sh
-          ./bump.sh zsy patch
+          chmod +x ./.github/.scropts/bump.sh
+          ./.github/.scropts/bump.sh zsy patch
