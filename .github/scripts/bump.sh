@@ -17,7 +17,7 @@ OCTET=$2
 git fetch --tags
 echo "Available tags:"
 git tag -l "${PREFIX}*"
-LATEST_TAG=$(git tag -l "${PREFIX}*" | grep -E "^${PREFIX}[0-9]+\.[0-9]+\.[0-9]+-snapshot$" | sort -V | tail -n 1)
+LATEST_TAG=$(git tag -l "${PREFIX}*" | grep -E "^${PREFIX}-[0-9]+\.[0-9]+\.[0-9]+-snapshot$" | sort -V | tail -n 1)
 
 
 # タグが存在しない場合の処理
