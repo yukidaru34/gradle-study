@@ -81,5 +81,3 @@ git tag "$NEW_TAG"
 git push origin "$NEW_TAG"
 echo "新しいタグ ${NEW_TAG} を作成しました。"
 echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-
-
