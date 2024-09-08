@@ -2,6 +2,7 @@ name: Build Common Component
 
 permissions:
   actions: write
+  contents: write
 
 on:
   workflow_dispatch:
