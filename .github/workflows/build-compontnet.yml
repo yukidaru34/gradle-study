@@ -5,6 +5,15 @@ permissions:
 
 on:
   workflow_dispatch:
+    inuts:
+      component_name:
+        type: string
+        required: true
+        default: zsy
+      octet:
+        type: string
+        required: true
+        default: patch
 
 env:
   GPR_USERNAME: ${{github.repositry_owner}}
@@ -21,4 +30,4 @@ jobs:
         run: |
           pwd
           chmod +x .github/scripts/bump.sh
-          .github/scripts/bump.sh zsy patch
+          .github/scripts/bump.sh ${{github.event.inputs.component_name}} ${{github.event.inputs.octet}}
