@@ -14,7 +14,9 @@ OCTET=$2
 
 
 # 現在のタグ一覧を取得し、正規表現で該当するプレフィックスのタグを検索
+git tag -l "${PREFIX}*"
 LATEST_TAG=$(git tag -l "${PREFIX}*" | grep -E "^${PREFIX}-[0-9]+\.[0-9]+\.[0-9]+-snapshot$" | sort -V | tail -n 1)
+
 
 # タグが存在しない場合の処理
 if [ -z "$LATEST_TAG" ]; then
