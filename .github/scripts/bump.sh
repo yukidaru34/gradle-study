@@ -28,6 +28,7 @@ case "$BRANCH" in
       ;;
     main)
       LABEL=""
+      ;;
     *)
       echo "無効なブランチ。"
       exit 1
