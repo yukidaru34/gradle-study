@@ -31,4 +31,4 @@ jobs:
         run: |
           pwd
           chmod +x .github/scripts/bump.sh
-          .github/scripts/bump.sh ${{github.event.inputs.component_name}} ${{github.event.inputs.octet}}
+          .github/scripts/bump.sh ${{github.event.inputs.component_name}} ${{github.event.inputs.octet}} develop
