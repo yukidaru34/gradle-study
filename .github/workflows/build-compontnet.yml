@@ -16,7 +16,7 @@ on:
         default: patch
 
 env:
-  GPR_USERNAME: ${{github.repositry_owner}}
+  GPR_USERNAME: ${{github.repository_owner}}
   GPR_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
