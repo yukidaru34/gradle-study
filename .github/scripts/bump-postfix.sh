@@ -24,7 +24,7 @@ case $LABEL in
         ;;
 esac
 
-if [ -z "$LATEST=TAG"]; then
+if [ -z "$LATEST_TAG"]; then
     echo "指定したプレフィックスが無効です"
     exit 1
 else
