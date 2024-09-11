@@ -2,7 +2,7 @@ name: CI api component scheduled
 
 on:
   cron:
-    - scheduke: '0 0 * * *'
+    - scheduke: '10 15 * * *'
 
 jobs:
   check_commit:
