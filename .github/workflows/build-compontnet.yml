@@ -1,10 +1,23 @@
 name: Build Common Component
 
+permissions:
+  actions: write
+  contents: write
+
 on:
   workflow_dispatch:
+    inputs:
+      component_name:
+        type: string
+        required: true
+        default: zsy
+      octet:
+        type: string
+        required: true
+        default: patch
 
 env:
-  GPR_USERNAME: ${{github.repositry_owner}}
+  GPR_USERNAME: ${{github.repository_owner}}
   GPR_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
@@ -14,7 +27,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setting publish properties
+      - name: bump.sh
         run: |
-          echo '${{env.GPR_USERNAME}}'
-          echo '${{env.GPR_TOKEN}}'
+          pwd
+          chmod +x .github/scripts/bump.sh
+          .github/scripts/bump.sh ${{github.event.inputs.component_name}} ${{github.event.inputs.octet}} develop
