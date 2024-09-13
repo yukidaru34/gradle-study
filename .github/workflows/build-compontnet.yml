@@ -34,6 +34,6 @@ jobs:
           .github/scripts/bump.sh ${{github.event.inputs.component_name}} ${{github.event.inputs.octet}} develop
 
       - name: check env variables
-        runs: |
+        run: |
           echo $NEW_VERSION
       
