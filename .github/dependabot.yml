@@ -10,7 +10,7 @@ updates:
     open-pull-requests-limit: 0
 
   - package-ecosystem: "gradle"
-    directory: "/"
+    directory: "/ysy"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 1
