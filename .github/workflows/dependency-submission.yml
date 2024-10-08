@@ -1,7 +1,7 @@
 name: Dependency Submission
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: ubuntu-latest
 
 permissions:
   contents: write
