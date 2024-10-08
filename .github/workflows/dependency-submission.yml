@@ -1,14 +1,14 @@
 name: Dependency Submission
 
 on:
-  workflow_dispatch: ubuntu-latest
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   dependency-submission:
-    runs-on: codebuild-actions-runner-${{ github.run_id }}-${{ github.run_attempt }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repositry
         uses: actions/checkout@v4
