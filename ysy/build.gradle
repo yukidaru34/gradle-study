@@ -44,6 +44,6 @@ publishing {
 task ysyJar(type: Jar) {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from sourceSets.main.output
-    form sourceSets.main.resources
+    from sourceSets.main.resources
     archiveVersion.set(project.hasProperty('jarVersion') ? project.jarVersion : version)
 }
